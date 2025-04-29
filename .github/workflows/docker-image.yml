@@ -14,18 +14,18 @@ jobs:
 #현재 리포지토리를 체크아웃(복사)해서 GitHub Actions 러너에 가져옵니다. 즉, .github/workflows 외의 프로젝트 소스코드도 사용할 수 있게 됩니다.
     - name: 프로퍼티스 생성
       run : |
-        echo "mysql.url=${{secret.MYSQL_URL}} >> ./src/main/resources/env.properties
-        echo "mysql.user=${{secret.MYSQL_USER}} >> ./src/main/resources/env.properties
-        echo "mysql.pw=${{secret.MYSQL_PW}} >> ./src/main/resources/env.properties
+        echo "mysql.url=${{secrets.MYSQL_URL}} >> ./src/main/resources/env.properties
+        echo "mysql.user=${{secrets.MYSQL_USER}} >> ./src/main/resources/env.properties
+        echo "mysql.pw=${{secrets.MYSQL_PW}} >> ./src/main/resources/env.properties
 
     - name: Set image tag
-      run: echo "IMAGE_TAG=${{secret.DOCKER_USERNAME}}/action-app:$(date +%s)" >> $GITHUB_ENV
+      run: echo "IMAGE_TAG=${{secrets.DOCKER_USERNAME}}/action-app:$(date +%s)" >> $GITHUB_ENV
 
     - name: Build the Docker image
       run: docker build  --platform linux/amd64 -t ${{env.IMAGE_TAG}} .
 
     - name: 도커 로그인
-      run: docker login -u ${{secret.DOCKER_USERNAME}} -P ${{secret.DOCKER_PW}}
+      run: docker login -u ${{secrets.DOCKER_USERNAME}} -P ${{secrets.DOCKER_PW}}
     - name: 도커 푸시
       run: docker push ${{env.IMAGE_TAG}}
     - name : 시크릿으로 저장된 pem을 파일로 작성 및 읽기 권한만 주기
