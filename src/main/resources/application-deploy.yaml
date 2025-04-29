@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: ${mysql.url}
+    username: ${mysql.user}
+    password: ${mysql.pw}
+server:
+  port: 80
+#  mysql -h spring-login.c3kagoq0wuew.ap-southeast-2.rds.amazonaws.com -P 3306 -u login_study_dev -p
