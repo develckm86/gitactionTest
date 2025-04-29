@@ -35,7 +35,7 @@ jobs:
 
     - name: ssh ec2 서버 로그인 및 도커 실행
       run: |
-        ssh -o StrictHostKeyChecking=no -i key.pem ${{secrets.EC2_HOST}} << 'EOF'
+        ssh -o StrictHostKeyChecking=no -i key.pem ${{secrets.EC2_USER}} << 'EOF'
         sudo docker stop app || true
         sudo docker rm app ||true
         sudo docker run -d --rm --name app ${{env.IMAGE_TAG}} 
