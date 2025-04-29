@@ -38,7 +38,7 @@ jobs:
         ssh -o StrictHostKeyChecking=no -i key.pem ${{secrets.EC2_USER}} << 'EOF'
         if ! command -v docker; then
           sudo apt update -y
-          sudo apt install docker.io
+          sudo apt install docker.io -y
         fi
         sudo docker stop app || true
         sudo docker rm app ||true
